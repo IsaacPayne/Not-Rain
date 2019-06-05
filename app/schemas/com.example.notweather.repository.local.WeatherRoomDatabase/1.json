@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "5ed0710322efb2ea7ac266a200d0a5aa",
+    "identityHash": "3fcbfe1b100b5d4a3fd0ce015b01dd8f",
     "entities": [
       {
         "tableName": "forecast",
@@ -129,7 +129,16 @@
           ],
           "autoGenerate": true
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_forecast_city_id",
+            "unique": false,
+            "columnNames": [
+              "city_id"
+            ],
+            "createSql": "CREATE  INDEX `index_forecast_city_id` ON `${TABLE_NAME}` (`city_id`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "city",
@@ -197,7 +206,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"5ed0710322efb2ea7ac266a200d0a5aa\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"3fcbfe1b100b5d4a3fd0ce015b01dd8f\")"
     ]
   }
 }

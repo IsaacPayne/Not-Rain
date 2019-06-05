@@ -6,6 +6,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import com.example.notweather.repository.WeatherTypeAdapter;
 import com.google.gson.annotations.Expose;
@@ -25,7 +26,8 @@ import java.util.TimeZone;
                         entity = City.class,
                         parentColumns = "id",
                         childColumns = "city_id",
-                        onDelete = CASCADE))
+                        onDelete = CASCADE),
+        indices = {@Index(value = {"city_id"})})
 public class Forecast {
 
     @PrimaryKey(autoGenerate = true)

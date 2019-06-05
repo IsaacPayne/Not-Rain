@@ -28,7 +28,7 @@ public class Main {
     private Double seaLevel;
 
     @ColumnInfo(name = "main_ground_level")
-    @SerializedName("ground_level")
+    @SerializedName("grnd_level")
     @Expose
     private Double groundLevel;
 
