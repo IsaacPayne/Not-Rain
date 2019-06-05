@@ -5,10 +5,8 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Transaction;
-
 import com.example.notweather.model.City;
 import com.example.notweather.model.CityForecast;
-
 import java.util.List;
 
 @Dao

@@ -3,9 +3,7 @@ package com.example.notweather.repository;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-/**
- * Taken from {see:https://github.com/googlesamples/android-architecture-components}
- */
+/** Taken from {see:https://github.com/googlesamples/android-architecture-components} */
 public class Resource<T> {
 
     public enum Status {
@@ -14,14 +12,11 @@ public class Resource<T> {
         LOADING
     }
 
-    @NonNull
-    public final Status status;
+    @NonNull public final Status status;
 
-    @Nullable
-    public final T data;
+    @Nullable public final T data;
 
-    @Nullable
-    public final String message;
+    @Nullable public final String message;
 
     private Resource(@NonNull Status status, @Nullable T data, @Nullable String message) {
         this.status = status;

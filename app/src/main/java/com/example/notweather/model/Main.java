@@ -1,11 +1,8 @@
-
 package com.example.notweather.model;
 
 import android.arch.persistence.room.ColumnInfo;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 import java.util.Locale;
 
 public class Main {
@@ -50,7 +47,15 @@ public class Main {
     @Expose
     private Double tempKf;
 
-    public Main(Double temp, Double pressure, Integer humidity, Double seaLevel, Double groundLevel, Double tempMin, Double tempMax, Double tempKf) {
+    public Main(
+            Double temp,
+            Double pressure,
+            Integer humidity,
+            Double seaLevel,
+            Double groundLevel,
+            Double tempMin,
+            Double tempMax,
+            Double tempKf) {
         this.temp = temp;
         this.pressure = pressure;
         this.humidity = humidity;

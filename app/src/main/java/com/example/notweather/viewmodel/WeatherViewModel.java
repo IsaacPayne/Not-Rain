@@ -3,24 +3,22 @@ package com.example.notweather.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-
 import com.example.notweather.model.CityForecast;
 import com.example.notweather.model.Forecast;
 import com.example.notweather.repository.CityForecastRepository;
 import com.example.notweather.repository.Resource;
-
 import java.util.List;
 
 public class WeatherViewModel extends AndroidViewModel {
 
     private CityForecastRepository repository;
 
-    //private LiveData<List<City>> allCities;
+    // private LiveData<List<City>> allCities;
 
     public WeatherViewModel(Application application) {
         super(application);
         repository = new CityForecastRepository(application);
-        //allCities = repository.getAllCityForecasts();
+        // allCities = repository.getAllCityForecasts();
     }
 
     public LiveData<List<CityForecast>> getAllCityForecasts() {
@@ -34,5 +32,4 @@ public class WeatherViewModel extends AndroidViewModel {
     public LiveData<Resource<CityForecast>> getWeatherById(int id) {
         return repository.getWeatherById(id);
     }
-
 }

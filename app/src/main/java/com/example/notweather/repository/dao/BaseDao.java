@@ -5,13 +5,10 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Transaction;
 import android.arch.persistence.room.Update;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Upserting: taken from https://tech.bakkenbaeck.com/post/room-insert-update
- */
+/** Upserting: taken from https://tech.bakkenbaeck.com/post/room-insert-update */
 @Dao
 abstract class BaseDao<T> {
     @Insert(onConflict = OnConflictStrategy.IGNORE)

@@ -4,7 +4,6 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
-
 import com.example.notweather.model.City;
 import com.example.notweather.model.CityForecast;
 import com.example.notweather.model.Forecast;
@@ -13,7 +12,6 @@ import com.example.notweather.repository.dao.ForecastDao;
 import com.example.notweather.repository.local.WeatherRoomDatabase;
 import com.example.notweather.repository.remote.NetworkingCallback;
 import com.example.notweather.repository.remote.RemoteStorage;
-
 import java.util.List;
 
 public class CityForecastRepository {
@@ -31,19 +29,21 @@ public class CityForecastRepository {
 
     public LiveData<Resource<CityForecast>> getWeatherById(int id) {
         final MutableLiveData<Resource<CityForecast>> liveData = new MutableLiveData<>();
-        liveData.postValue(Resource.loading((CityForecast)null));
-        remoteStorage.getCurrentWeatherById(id, new NetworkingCallback<CityForecast>() {
-            @Override
-            public void onSuccess(CityForecast response) {
-                insert(response);
-                liveData.postValue(Resource.success(response));
-            }
+        liveData.postValue(Resource.loading((CityForecast) null));
+        remoteStorage.getCurrentWeatherById(
+                id,
+                new NetworkingCallback<CityForecast>() {
+                    @Override
+                    public void onSuccess(CityForecast response) {
+                        insert(response);
+                        liveData.postValue(Resource.success(response));
+                    }
 
-            @Override
-            public void onFailure(Throwable error) {
-                liveData.setValue(Resource.error(error.getMessage(), (CityForecast)null));
-            }
-        });
+                    @Override
+                    public void onFailure(Throwable error) {
+                        liveData.setValue(Resource.error(error.getMessage(), (CityForecast) null));
+                    }
+                });
         return liveData;
     }
 
@@ -77,7 +77,7 @@ public class CityForecastRepository {
             cityDao.delete(city);
             // Then we insert the new data
             cityDao.insert(city);
-            for (Forecast forecast: params[0].getForecasts()) {
+            for (Forecast forecast : params[0].getForecasts()) {
                 forecast.setCityId(city.getId());
             }
             forecastDao.insertOrUpdate(params[0].getForecasts());

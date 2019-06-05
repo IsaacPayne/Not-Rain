@@ -1,16 +1,16 @@
 package com.example.notweather.model;
 
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
-
 import com.example.notweather.repository.WeatherTypeAdapter;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -18,12 +18,14 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import static android.arch.persistence.room.ForeignKey.CASCADE;
-
-@Entity(tableName = "forecast", foreignKeys = @ForeignKey(entity = City.class,
-        parentColumns = "id",
-        childColumns = "city_id",
-        onDelete = CASCADE))
+@Entity(
+        tableName = "forecast",
+        foreignKeys =
+                @ForeignKey(
+                        entity = City.class,
+                        parentColumns = "id",
+                        childColumns = "city_id",
+                        onDelete = CASCADE))
 public class Forecast {
 
     @PrimaryKey(autoGenerate = true)
@@ -64,8 +66,15 @@ public class Forecast {
     @Expose
     private String datetimeString;
 
-    public Forecast(int id, int cityId, Wind wind, Weather weather, Main main,
-                    Clouds clouds, Long timestamp, String datetimeString) {
+    public Forecast(
+            int id,
+            int cityId,
+            Wind wind,
+            Weather weather,
+            Main main,
+            Clouds clouds,
+            Long timestamp,
+            String datetimeString) {
         this.id = id;
         this.cityId = cityId;
         this.wind = wind;

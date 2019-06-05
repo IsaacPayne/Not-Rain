@@ -2,14 +2,12 @@ package com.example.notweather.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Ignore;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Wind {
 
-    @Ignore
-    private final String[] directions = {"N","NE","E","SE","S","SW","W","NW","N"};
+    @Ignore private final String[] directions = {"N", "NE", "E", "SE", "S", "SW", "W", "NW", "N"};
 
     @ColumnInfo(name = "wind_speed")
     @SerializedName("speed")
@@ -36,8 +34,7 @@ public class Wind {
 
     public String getDirection() {
         double mod = deg % 360;
-        int index = (int)Math.round(mod/45)+1;
+        int index = (int) Math.round(mod / 45) + 1;
         return directions[index];
     }
-
 }

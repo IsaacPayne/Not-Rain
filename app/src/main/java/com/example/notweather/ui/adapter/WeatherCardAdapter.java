@@ -4,14 +4,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import com.example.notweather.databinding.CardWeatherBinding;
 import com.example.notweather.model.Forecast;
 import com.example.notweather.viewholders.WeatherViewHolder;
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherViewHolder> {
 
@@ -24,11 +21,9 @@ public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherViewHolder> 
     @NonNull
     @Override
     public WeatherViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater =
-                LayoutInflater.from(parent.getContext());
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 
-        CardWeatherBinding itemBinding =
-                CardWeatherBinding.inflate(layoutInflater, parent, false);
+        CardWeatherBinding itemBinding = CardWeatherBinding.inflate(layoutInflater, parent, false);
         return new WeatherViewHolder(itemBinding);
     }
 

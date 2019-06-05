@@ -11,14 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-
 import com.example.notweather.R;
-import com.example.notweather.ui.adapter.WeatherCardAdapter;
 import com.example.notweather.model.CityForecast;
 import com.example.notweather.model.Forecast;
 import com.example.notweather.repository.Resource;
+import com.example.notweather.ui.adapter.WeatherCardAdapter;
 import com.example.notweather.viewmodel.WeatherViewModel;
-
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,44 +43,54 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        //textView = findViewById(R.id.tv_sample_text);
+        // textView = findViewById(R.id.tv_sample_text);
         weatherViewModel = ViewModelProviders.of(this).get(WeatherViewModel.class);
-        weatherViewModel.getForecastsForCityById(DEFAULT_CITY_ID).observe(this, new Observer<List<Forecast>>() {
-            @Override
-            public void onChanged(@Nullable final List<Forecast> forecasts) {
-                Log.i(TAG, "forecasts changed");
-                adapter.setCardList(forecasts);
-            }
-        });
+        weatherViewModel
+                .getForecastsForCityById(DEFAULT_CITY_ID)
+                .observe(
+                        this,
+                        new Observer<List<Forecast>>() {
+                            @Override
+                            public void onChanged(@Nullable final List<Forecast> forecasts) {
+                                Log.i(TAG, "forecasts changed");
+                                adapter.setCardList(forecasts);
+                            }
+                        });
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getWeatherById();
-            }
-        });
+        fab.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        getWeatherById();
+                    }
+                });
     }
 
     private void getWeatherById() {
-        weatherViewModel.getWeatherById(DEFAULT_CITY_ID).observe(this, new Observer<Resource<CityForecast>>() {
-            @Override
-            public void onChanged(@Nullable Resource<CityForecast> currentWeatherResource) {
-                if (currentWeatherResource == null) {
-                    return;
-                }
+        weatherViewModel
+                .getWeatherById(DEFAULT_CITY_ID)
+                .observe(
+                        this,
+                        new Observer<Resource<CityForecast>>() {
+                            @Override
+                            public void onChanged(
+                                    @Nullable Resource<CityForecast> currentWeatherResource) {
+                                if (currentWeatherResource == null) {
+                                    return;
+                                }
 
-                switch (currentWeatherResource.status) {
-                    case SUCCESS:
-                        Log.i(TAG, "getWeatherById SUCCESS");
-                        break;
-                    case ERROR:
-                        Log.i(TAG, "getWeatherById ERROR");
-                        break;
-                    case LOADING:
-                        Log.i(TAG, "getWeatherById LOADING");
-                        break;
-                }
-            }
-        });
+                                switch (currentWeatherResource.status) {
+                                    case SUCCESS:
+                                        Log.i(TAG, "getWeatherById SUCCESS");
+                                        break;
+                                    case ERROR:
+                                        Log.i(TAG, "getWeatherById ERROR");
+                                        break;
+                                    case LOADING:
+                                        Log.i(TAG, "getWeatherById LOADING");
+                                        break;
+                                }
+                            }
+                        });
     }
 }
