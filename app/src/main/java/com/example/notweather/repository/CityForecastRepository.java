@@ -1,0 +1,87 @@
+package com.example.notweather.repository;
+
+import android.app.Application;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.os.AsyncTask;
+
+import com.example.notweather.model.City;
+import com.example.notweather.model.CityForecast;
+import com.example.notweather.model.Forecast;
+import com.example.notweather.repository.dao.CityDao;
+import com.example.notweather.repository.dao.ForecastDao;
+import com.example.notweather.repository.local.WeatherRoomDatabase;
+import com.example.notweather.repository.remote.NetworkingCallback;
+import com.example.notweather.repository.remote.RemoteStorage;
+
+import java.util.List;
+
+public class CityForecastRepository {
+
+    private CityDao cityDao;
+    private ForecastDao forecastDao;
+    private RemoteStorage remoteStorage;
+
+    public CityForecastRepository(Application application) {
+        WeatherRoomDatabase db = WeatherRoomDatabase.getDatabase(application);
+        remoteStorage = RemoteStorage.getRemoteStorage();
+        cityDao = db.cityDao();
+        forecastDao = db.forecastDao();
+    }
+
+    public LiveData<Resource<CityForecast>> getWeatherById(int id) {
+        final MutableLiveData<Resource<CityForecast>> liveData = new MutableLiveData<>();
+        liveData.postValue(Resource.loading((CityForecast)null));
+        remoteStorage.getCurrentWeatherById(id, new NetworkingCallback<CityForecast>() {
+            @Override
+            public void onSuccess(CityForecast response) {
+                insert(response);
+                liveData.postValue(Resource.success(response));
+            }
+
+            @Override
+            public void onFailure(Throwable error) {
+                liveData.setValue(Resource.error(error.getMessage(), (CityForecast)null));
+            }
+        });
+        return liveData;
+    }
+
+    public LiveData<List<CityForecast>> getAllCityForecasts() {
+        return cityDao.getAllCityForecasts();
+    }
+
+    public LiveData<List<Forecast>> getForecastsForCityById(int cityId) {
+        return forecastDao.getForecastsForCityById(cityId);
+    }
+
+    public void insert(CityForecast weather) {
+        new insertAsyncTask(cityDao, forecastDao).execute(weather);
+    }
+
+    private static class insertAsyncTask extends AsyncTask<CityForecast, Void, Void> {
+
+        private CityDao cityDao;
+        private ForecastDao forecastDao;
+
+        insertAsyncTask(CityDao cityDao, ForecastDao forecastDao) {
+            this.cityDao = cityDao;
+            this.forecastDao = forecastDao;
+        }
+
+        @Override
+        protected Void doInBackground(final CityForecast... params) {
+            CityForecast cityForecast = params[0];
+            City city = cityForecast.getCity();
+            // First we clean out the table of any old data
+            cityDao.delete(city);
+            // Then we insert the new data
+            cityDao.insert(city);
+            for (Forecast forecast: params[0].getForecasts()) {
+                forecast.setCityId(city.getId());
+            }
+            forecastDao.insertOrUpdate(params[0].getForecasts());
+            return null;
+        }
+    }
+}
