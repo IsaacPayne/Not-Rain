@@ -12,7 +12,7 @@ public class Coordinates {
     private double lat;
 
     @ColumnInfo(name = "coordinates_lng")
-    @SerializedName("lng")
+    @SerializedName("lon")
     @Expose
     private double lng;
 

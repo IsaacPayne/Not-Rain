@@ -4,4 +4,6 @@
     <string name="temp">Temp: %s</string>
     <string name="name">Name: %s</string>
     <string name="wind">Wind: %s %sm/s</string>
+    <string name="location_required">Location Required</string>
+    <string name="location_require_rationale">We need access to your location to show you the weather in your area</string>
 </resources>
