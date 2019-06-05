@@ -25,11 +25,10 @@ public class WeatherViewModel extends AndroidViewModel {
         return repository.getCityForecasts();
     }
 
-    public LiveData<List<Forecast>> getForecastsForCityById(int cityId) {
+    public LiveData<Resource.Status> getCurrentWeatherByLatLng(double lat, double lng) {
         return repository.getForecastsForCityById(cityId);
     }
 
-    public LiveData<Resource<CityForecast>> getCurrentWeatherByLatLng(double lat, double lng) {
         return repository.getCurrentWeatherByLatLng(lat, lng);
     }
 }

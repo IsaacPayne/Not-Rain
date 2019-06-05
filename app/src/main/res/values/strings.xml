@@ -6,4 +6,7 @@
     <string name="forecast">%s: %s</string>
     <string name="location_required">Location Required</string>
     <string name="location_require_rationale">We need access to your location to show you the weather in your area</string>
+    <string name="successfully_loaded_forecast">Successfully Loaded Forecast</string>
+    <string name="failed_to_load_forecast">Failed To Load Forecast</string>
+    <string name="loading_forecast">Loading Forecast For Current Location…</string>
 </resources>

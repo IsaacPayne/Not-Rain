@@ -27,9 +27,9 @@ public class CityForecastRepository {
         forecastDao = db.forecastDao();
     }
 
-    public LiveData<Resource<CityForecast>> getCurrentWeatherByLatLng(double lat, double lng) {
-        final MutableLiveData<Resource<CityForecast>> liveData = new MutableLiveData<>();
-        liveData.postValue(Resource.loading(null));
+    public LiveData<Resource.Status> getCurrentWeatherByLatLng(double lat, double lng) {
+        final MutableLiveData<Resource.Status> liveData = new MutableLiveData<>();
+        liveData.postValue(Resource.Status.LOADING);
         remoteStorage.getCurrentWeatherByLatLng(
                 lat,
                 lng,
@@ -37,12 +37,12 @@ public class CityForecastRepository {
                     @Override
                     public void onSuccess(CityForecast response) {
                         insert(response);
-                        liveData.postValue(Resource.success(response));
+                        liveData.postValue(Resource.Status.SUCCESS);
                     }
 
                     @Override
                     public void onFailure(Throwable error) {
-                        liveData.setValue(Resource.error(error.getMessage(), null));
+                        liveData.setValue(Resource.Status.ERROR);
                     }
                 });
         return liveData;
