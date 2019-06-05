@@ -21,15 +21,15 @@ public class WeatherViewModel extends AndroidViewModel {
         // allCities = repository.getAllCityForecasts();
     }
 
-    public LiveData<List<CityForecast>> getAllCityForecasts() {
-        return repository.getAllCityForecasts();
+    public LiveData<CityForecast> getCityForecasts() {
+        return repository.getCityForecasts();
     }
 
     public LiveData<List<Forecast>> getForecastsForCityById(int cityId) {
         return repository.getForecastsForCityById(cityId);
     }
 
-    public LiveData<Resource<CityForecast>> getWeatherById(int id) {
-        return repository.getWeatherById(id);
+    public LiveData<Resource<CityForecast>> getCurrentWeatherByLatLng(double lat, double lng) {
+        return repository.getCurrentWeatherByLatLng(lat, lng);
     }
 }

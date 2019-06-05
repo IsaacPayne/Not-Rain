@@ -27,11 +27,12 @@ public class CityForecastRepository {
         forecastDao = db.forecastDao();
     }
 
-    public LiveData<Resource<CityForecast>> getWeatherById(int id) {
+    public LiveData<Resource<CityForecast>> getCurrentWeatherByLatLng(double lat, double lng) {
         final MutableLiveData<Resource<CityForecast>> liveData = new MutableLiveData<>();
-        liveData.postValue(Resource.loading((CityForecast) null));
-        remoteStorage.getCurrentWeatherById(
-                id,
+        liveData.postValue(Resource.loading(null));
+        remoteStorage.getCurrentWeatherByLatLng(
+                lat,
+                lng,
                 new NetworkingCallback<CityForecast>() {
                     @Override
                     public void onSuccess(CityForecast response) {
@@ -41,14 +42,14 @@ public class CityForecastRepository {
 
                     @Override
                     public void onFailure(Throwable error) {
-                        liveData.setValue(Resource.error(error.getMessage(), (CityForecast) null));
+                        liveData.setValue(Resource.error(error.getMessage(), null));
                     }
                 });
         return liveData;
     }
 
-    public LiveData<List<CityForecast>> getAllCityForecasts() {
-        return cityDao.getAllCityForecasts();
+    public LiveData<CityForecast> getCityForecasts() {
+        return cityDao.getCityForecasts();
     }
 
     public LiveData<List<Forecast>> getForecastsForCityById(int cityId) {
@@ -74,7 +75,7 @@ public class CityForecastRepository {
             CityForecast cityForecast = params[0];
             City city = cityForecast.getCity();
             // First we clean out the table of any old data
-            cityDao.delete(city);
+            cityDao.deleteAll();
             // Then we insert the new data
             cityDao.insert(city);
             for (Forecast forecast : params[0].getForecasts()) {

@@ -8,7 +8,6 @@ import retrofit2.http.Query;
 public interface OpenWeatherApi {
 
     @GET("forecast")
-    // api.openweathermap.org/data/2.5/weather?id=2172797
     Call<CityForecast> getCurrentWeatherById(
             @Query("appid") String appId, @Query("units") String units, @Query("id") int id);
 
@@ -17,5 +16,5 @@ public interface OpenWeatherApi {
             @Query("appid") String appId,
             @Query("units") String units,
             @Query("lat") double lat,
-            @Query("lng") double lng);
+            @Query("lon") double lng);
 }
