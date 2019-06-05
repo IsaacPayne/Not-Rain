@@ -6,6 +6,8 @@ import com.example.notweather.model.CityForecast;
 import com.example.notweather.repository.Storage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,11 +34,20 @@ public class RemoteStorage implements Storage {
 
     private RemoteStorage() {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+
+        if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+            httpClient.addInterceptor(logging);
+        }
 
         Retrofit retrofit =
                 new Retrofit.Builder()
                         .baseUrl(BuildConfig.BaseUrl)
                         .addConverterFactory(GsonConverterFactory.create(gson))
+                        .client(httpClient.build())
                         .build();
 
         openWeatherApi = retrofit.create(OpenWeatherApi.class);
