@@ -32,7 +32,7 @@ public class Forecast {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    private int id;
+    private final int id;
 
     @ColumnInfo(name = "city_id")
     private int cityId;
@@ -40,33 +40,33 @@ public class Forecast {
     @Embedded
     @SerializedName("wind")
     @Expose
-    private Wind wind;
+    private final Wind wind;
 
     @Embedded
     @SerializedName("weather")
     @Expose
     @JsonAdapter(WeatherTypeAdapter.class)
-    private Weather weather;
+    private final Weather weather;
 
     @Embedded
     @SerializedName("main")
     @Expose
-    private Main main;
+    private final Main main;
 
     @Embedded
     @SerializedName("clouds")
     @Expose
-    private Clouds clouds;
+    private final Clouds clouds;
 
     @ColumnInfo(name = "dt")
     @SerializedName("dt")
     @Expose
-    private Long timestamp;
+    private final Long timestamp;
 
     @ColumnInfo(name = "dt_txt")
     @SerializedName("dt_txt")
     @Expose
-    private String datetimeString;
+    private final String datetimeString;
 
     public Forecast(
             int id,
@@ -123,8 +123,7 @@ public class Forecast {
         Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
         calendar.setTimeInMillis(timestamp * 1000);
 
-        String pattern = "yyyy-MM-dd hha";
-        DateFormat formatter = new SimpleDateFormat(pattern, Locale.getDefault());
+        DateFormat formatter = new SimpleDateFormat("EEE hha", Locale.getDefault());
         formatter.setTimeZone(TimeZone.getDefault());
 
         return formatter.format(calendar.getTime());

@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RemoteStorage implements Storage {
     private final String DEFAULT_UNITS = "metric";
 
-    private OpenWeatherApi openWeatherApi;
+    private final OpenWeatherApi openWeatherApi;
 
     private static volatile RemoteStorage INSTANCE;
 
@@ -51,14 +51,6 @@ public class RemoteStorage implements Storage {
                         .build();
 
         openWeatherApi = retrofit.create(OpenWeatherApi.class);
-    }
-
-    @Override
-    public void getCurrentWeatherById(
-            int id, @NonNull final NetworkingCallback<CityForecast> networkingCallback) {
-        openWeatherApi
-                .getCurrentWeatherById(BuildConfig.ApiKey, DEFAULT_UNITS, id)
-                .enqueue(createCallback(networkingCallback));
     }
 
     @Override

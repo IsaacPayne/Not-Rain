@@ -9,12 +9,12 @@ public class Coordinates {
     @ColumnInfo(name = "coordinates_lat")
     @SerializedName("lat")
     @Expose
-    private double lat;
+    private final double lat;
 
     @ColumnInfo(name = "coordinates_lng")
     @SerializedName("lon")
     @Expose
-    private double lng;
+    private final double lng;
 
     public Coordinates(double lat, double lng) {
         this.lat = lat;

@@ -9,7 +9,7 @@ public class Clouds {
     @ColumnInfo(name = "clouds_all")
     @SerializedName("all")
     @Expose
-    private Integer all;
+    private final Integer all;
 
     public Clouds(Integer all) {
         this.all = all;

@@ -11,7 +11,7 @@ public class CityForecast {
     @Embedded
     @SerializedName("city")
     @Expose
-    private City city;
+    private final City city;
 
     @Relation(parentColumn = "id", entityColumn = "city_id", entity = Forecast.class)
     @SerializedName("list")

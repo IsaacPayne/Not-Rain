@@ -18,22 +18,22 @@ public class Weather {
     @ColumnInfo(name = "weather_id")
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private final Integer id;
 
     @ColumnInfo(name = "weather_main")
     @SerializedName("main")
     @Expose
-    private String main;
+    private final String main;
 
     @ColumnInfo(name = "weather_description")
     @SerializedName("description")
     @Expose
-    private String description;
+    private final String description;
 
     @ColumnInfo(name = "weather_icon")
     @SerializedName("icon")
     @Expose
-    private String icon;
+    private final String icon;
 
     public Weather(Integer id, String main, String description, String icon) {
         this.id = id;

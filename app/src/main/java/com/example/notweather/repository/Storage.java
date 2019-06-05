@@ -6,9 +6,6 @@ import com.example.notweather.repository.remote.NetworkingCallback;
 
 public interface Storage {
 
-    void getCurrentWeatherById(
-            int id, @NonNull final NetworkingCallback<CityForecast> networkingCallback);
-
     void getCurrentWeatherByLatLng(
             double lat,
             double lng,

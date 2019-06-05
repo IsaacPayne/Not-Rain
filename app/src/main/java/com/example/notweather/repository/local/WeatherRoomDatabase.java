@@ -14,6 +14,8 @@ import com.example.notweather.repository.dao.ForecastDao;
         version = 1)
 public abstract class WeatherRoomDatabase extends RoomDatabase {
 
+    public static final String WEATHER_DATABASE_NAME = "weather_database";
+
     public abstract CityDao cityDao();
 
     public abstract ForecastDao forecastDao();
@@ -28,7 +30,7 @@ public abstract class WeatherRoomDatabase extends RoomDatabase {
                             Room.databaseBuilder(
                                             context.getApplicationContext(),
                                             WeatherRoomDatabase.class,
-                                            "weather_database")
+                                            WEATHER_DATABASE_NAME)
                                     .build();
                 }
             }

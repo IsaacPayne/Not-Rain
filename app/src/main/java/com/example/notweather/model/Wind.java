@@ -12,12 +12,12 @@ public class Wind {
     @ColumnInfo(name = "wind_speed")
     @SerializedName("speed")
     @Expose
-    private double speed;
+    private final double speed;
 
     @ColumnInfo(name = "wind_deg")
     @SerializedName("deg")
     @Expose
-    private double deg;
+    private final double deg;
 
     public Wind(double speed, double deg) {
         this.speed = speed;
@@ -34,7 +34,7 @@ public class Wind {
 
     public String getDirection() {
         double mod = deg % 360;
-        int index = (int) Math.round(mod / 45) + 1;
+        int index = (int) Math.round(mod / 45);
         return directions[index];
     }
 }

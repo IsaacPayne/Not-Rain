@@ -10,42 +10,42 @@ public class Main {
     @ColumnInfo(name = "main_temp")
     @SerializedName("temp")
     @Expose
-    private Double temp;
+    private final Double temp;
 
     @ColumnInfo(name = "main_pressure")
     @SerializedName("pressure")
     @Expose
-    private Double pressure;
+    private final Double pressure;
 
     @ColumnInfo(name = "main_humidity")
     @SerializedName("humidity")
     @Expose
-    private Integer humidity;
+    private final Integer humidity;
 
     @ColumnInfo(name = "main_sea_level")
     @SerializedName("sea_level")
     @Expose
-    private Double seaLevel;
+    private final Double seaLevel;
 
     @ColumnInfo(name = "main_ground_level")
     @SerializedName("grnd_level")
     @Expose
-    private Double groundLevel;
+    private final Double groundLevel;
 
     @ColumnInfo(name = "main_temp_min")
     @SerializedName("temp_min")
     @Expose
-    private Double tempMin;
+    private final Double tempMin;
 
     @ColumnInfo(name = "main_temp_max")
     @SerializedName("temp_max")
     @Expose
-    private Double tempMax;
+    private final Double tempMax;
 
     @ColumnInfo(name = "main_temp_kf")
     @SerializedName("temp_kf")
     @Expose
-    private Double tempKf;
+    private final Double tempKf;
 
     public Main(
             Double temp,

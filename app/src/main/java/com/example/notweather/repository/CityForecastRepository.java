@@ -12,13 +12,12 @@ import com.example.notweather.repository.dao.ForecastDao;
 import com.example.notweather.repository.local.WeatherRoomDatabase;
 import com.example.notweather.repository.remote.NetworkingCallback;
 import com.example.notweather.repository.remote.RemoteStorage;
-import java.util.List;
 
 public class CityForecastRepository {
 
-    private CityDao cityDao;
-    private ForecastDao forecastDao;
-    private RemoteStorage remoteStorage;
+    private final CityDao cityDao;
+    private final ForecastDao forecastDao;
+    private final RemoteStorage remoteStorage;
 
     public CityForecastRepository(Application application) {
         WeatherRoomDatabase db = WeatherRoomDatabase.getDatabase(application);
@@ -52,18 +51,14 @@ public class CityForecastRepository {
         return cityDao.getCityForecasts();
     }
 
-    public LiveData<List<Forecast>> getForecastsForCityById(int cityId) {
-        return forecastDao.getForecastsForCityById(cityId);
-    }
-
-    public void insert(CityForecast weather) {
+    private void insert(CityForecast weather) {
         new insertAsyncTask(cityDao, forecastDao).execute(weather);
     }
 
     private static class insertAsyncTask extends AsyncTask<CityForecast, Void, Void> {
 
-        private CityDao cityDao;
-        private ForecastDao forecastDao;
+        private final CityDao cityDao;
+        private final ForecastDao forecastDao;
 
         insertAsyncTask(CityDao cityDao, ForecastDao forecastDao) {
             this.cityDao = cityDao;

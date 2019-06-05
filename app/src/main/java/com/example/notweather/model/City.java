@@ -14,27 +14,27 @@ public class City {
     @ColumnInfo(name = "id")
     @SerializedName("id")
     @Expose
-    private int id;
+    private final int id;
 
     @ColumnInfo(name = "city_name")
     @SerializedName("name")
     @Expose
-    private String name;
+    private final String name;
 
     @Embedded
     @SerializedName("coord")
     @Expose
-    private Coordinates coordinates;
+    private final Coordinates coordinates;
 
     @ColumnInfo(name = "country")
     @SerializedName("country")
     @Expose
-    private String country;
+    private final String country;
 
     @ColumnInfo(name = "timezone")
     @SerializedName("timezone")
     @Expose
-    private Integer timezone;
+    private final Integer timezone;
 
     public City(int id, String name, Coordinates coordinates, String country, Integer timezone) {
         this.id = id;
