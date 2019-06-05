@@ -1,14 +1,10 @@
 package com.example.notweather.ui;
 
 import android.Manifest;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
@@ -17,15 +13,12 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import com.example.notweather.R;
-import com.example.notweather.model.CityForecast;
-import com.example.notweather.repository.Resource;
+import com.example.notweather.model.City;
 import com.example.notweather.ui.adapter.WeatherCardAdapter;
 import com.example.notweather.viewmodel.WeatherViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PERMISSIONS_REQUEST_COARSE_LOCATION = 7689;
@@ -40,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(findViewById(R.id.toolbar));
 
         RecyclerView recyclerView = findViewById(R.id.rv_weather_card_list);
         adapter = new WeatherCardAdapter();
@@ -49,35 +41,23 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        // textView = findViewById(R.id.tv_sample_text);
         weatherViewModel = ViewModelProviders.of(this).get(WeatherViewModel.class);
         weatherViewModel
                 .getCityForecasts()
                 .observe(
                         this,
-                        new Observer<CityForecast>() {
-                            @Override
-                            public void onChanged(@Nullable final CityForecast cityForecast) {
-                                if (cityForecast == null) {
-                                    return;
-                                }
-                                Log.i(TAG, "forecasts changed");
-                                setTitle(
-                                        String.format(
-                                                "%s (%s)",
-                                                cityForecast.getCity().getName(),
-                                                cityForecast.getCity().getCountry()));
-                                adapter.setCardList(cityForecast.getForecasts());
+                        cityForecast -> {
+                            if (cityForecast == null) {
+                                return;
                             }
+
+                            City city = cityForecast.getCity();
+                            setTitle(String.format("%s (%s)", city.getName(), city.getCountry()));
+
+                            adapter.setCardList(cityForecast.getForecasts());
                         });
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        getUsersLocation();
-                    }
-                });
+        fab.setOnClickListener(view -> getUsersLocation());
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
@@ -93,15 +73,9 @@ public class MainActivity extends AppCompatActivity {
                 // Show an explanation to the user
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(R.string.location_required)
-                        .setMessage(
-                                R.string.location_require_rationale)
+                        .setMessage(R.string.location_require_rationale)
                         .setPositiveButton(
-                                android.R.string.ok,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        requestLocationPermission();
-                                    }
-                                });
+                                android.R.string.ok, (dialog, id) -> requestLocationPermission());
                 builder.create().show();
 
             } else {
@@ -115,17 +89,13 @@ public class MainActivity extends AppCompatActivity {
                 .getLastLocation()
                 .addOnSuccessListener(
                         this,
-                        new OnSuccessListener<Location>() {
-                            @Override
-                            public void onSuccess(Location location) {
-                                // Got last known location. In some rare situations this can be
-                                // null.
-                                if (location != null) {
-                                    Log.i(TAG, "Location! " + location.toString());
-                                    // Logic to handle location object
-                                    getCurrentWeatherByLatLng(
-                                            location.getLatitude(), location.getLongitude());
-                                }
+                        location -> {
+                            // Got last known location. In some rare situations this can be null.
+                            if (location != null) {
+                                Log.i(TAG, "Location! " + location.toString());
+                                // Logic to handle location object
+                                getCurrentWeatherByLatLng(
+                                        location.getLatitude(), location.getLongitude());
                             }
                         });
     }
@@ -161,25 +131,21 @@ public class MainActivity extends AppCompatActivity {
                 .getCurrentWeatherByLatLng(lat, lng)
                 .observe(
                         this,
-                        new Observer<Resource<CityForecast>>() {
-                            @Override
-                            public void onChanged(
-                                    @Nullable Resource<CityForecast> currentWeatherResource) {
-                                if (currentWeatherResource == null) {
-                                    return;
-                                }
+                        currentWeatherResource -> {
+                            if (currentWeatherResource == null) {
+                                return;
+                            }
 
-                                switch (currentWeatherResource.status) {
-                                    case SUCCESS:
-                                        Log.i(TAG, "getWeatherById SUCCESS");
-                                        break;
-                                    case ERROR:
-                                        Log.i(TAG, "getWeatherById ERROR");
-                                        break;
-                                    case LOADING:
-                                        Log.i(TAG, "getWeatherById LOADING");
-                                        break;
-                                }
+                            switch (currentWeatherResource.status) {
+                                case SUCCESS:
+                                    Log.i(TAG, "getWeatherById SUCCESS");
+                                    break;
+                                case ERROR:
+                                    Log.i(TAG, "getWeatherById ERROR");
+                                    break;
+                                case LOADING:
+                                    Log.i(TAG, "getWeatherById LOADING");
+                                    break;
                             }
                         });
     }
