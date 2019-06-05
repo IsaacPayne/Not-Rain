@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/colorCards"
         app:cardElevation="5dp"
         app:contentPadding="10dp"
         app:cardCornerRadius="4dp">
@@ -18,14 +19,45 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:padding="10dp"
+                android:contentDescription="@{forecast.weather.description}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:src="@drawable/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/tv_not_rain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:text="@{forecast.weather.rainNotRain}"
+                app:layout_constraintStart_toEndOf="@id/iv_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Not Rain"/>
+
+            <TextView
+                android:id="@+id/tv_forecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@{@string/forecast(forecast.weather.main, forecast.weather.description)}"
+                app:layout_constraintStart_toEndOf="@id/iv_icon"
+                app:layout_constraintTop_toBottomOf="@id/tv_not_rain"
+                tools:text="Rain: 	light rain"/>
+
             <TextView
                 android:id="@+id/tv_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:text="@{@string/temp(forecast.main.formattedTemperature)}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_icon"
+                app:layout_constraintTop_toBottomOf="@id/tv_forecast"
                 tools:text="Temp: 15.07"/>
 
             <TextView
@@ -34,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:text="@{@string/wind(forecast.wind.direction, forecast.wind.speed)}"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_icon"
                 app:layout_constraintTop_toBottomOf="@id/tv_temp"
                 tools:text="Wind: NW 3.6m/s"/>
 
@@ -46,7 +78,7 @@
                 android:text="@{forecast.dateAsLocalTime}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:text="yyyy-MM-dd HH:mm:ss"/>
+                tools:text="Wed 09PM"/>
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
