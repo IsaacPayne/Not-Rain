@@ -23,6 +23,6 @@ public class ForecastTest {
         Long tueOnePm = 1560178800000L;
         Forecast forecast = new Forecast(0, 1, wind, weather, main, clouds, tueOnePm, "");
 
-        assertEquals("Tue 01PM", forecast.getDateAsLocalTime());
+        assertEquals("Tuesday 01:00 PM", forecast.getDateAsLocalTime());
     }
 }

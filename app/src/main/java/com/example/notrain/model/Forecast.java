@@ -123,7 +123,7 @@ public class Forecast {
         Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
         calendar.setTimeInMillis(timestamp * 1000);
 
-        DateFormat formatter = new SimpleDateFormat("EEE hha", Locale.getDefault());
+        DateFormat formatter = new SimpleDateFormat("EEEE hh:mm a", Locale.getDefault());
         formatter.setTimeZone(TimeZone.getDefault());
 
         return formatter.format(calendar.getTime());
