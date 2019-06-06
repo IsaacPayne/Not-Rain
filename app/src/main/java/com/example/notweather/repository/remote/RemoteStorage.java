@@ -68,12 +68,18 @@ public class RemoteStorage implements Storage {
         return new Callback<T>() {
             @Override
             public void onResponse(@NonNull Call<T> call, @NonNull Response<T> response) {
-                networkingCallback.onSuccess(response.body());
+                if (response.isSuccessful()) {
+                    networkingCallback.onSuccess(response.body());
+                    return;
+                }
+
+                // TODO: Handle failure codes better
+                networkingCallback.onFailure();
             }
 
             @Override
             public void onFailure(@NonNull Call<T> call, @NonNull Throwable t) {
-                networkingCallback.onFailure(t);
+                networkingCallback.onFailure();
             }
         };
     }

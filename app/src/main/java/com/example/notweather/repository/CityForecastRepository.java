@@ -40,7 +40,7 @@ public class CityForecastRepository {
                     }
 
                     @Override
-                    public void onFailure(Throwable error) {
+                    public void onFailure() {
                         liveData.setValue(Resource.Status.ERROR);
                     }
                 });
