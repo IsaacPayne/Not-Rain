@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
-                app:title="@{@string/city_format(city.name, city.country)}"
+                app:title="@{city == null ? @string/app_name : @string/city_format(city.name, city.country)}"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </com.google.android.material.appbar.AppBarLayout>
