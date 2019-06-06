@@ -4,12 +4,16 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Ignore;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.util.regex.Pattern;
 
 public class Weather {
 
+    @Ignore private final String RAIN_NOT_RAIN_PATTERN_MATCHER = ".*rain.*|.*drizzle.*";
     @Ignore private final String ICON_URL_FORMAT = "https://api.openweathermap.org/img/w/%s.png";
-    @Ignore private final String RAIN = "Rain";
-    @Ignore private final String NOT_RAIN = "Not Rain";
+    @Ignore static final String RAIN = "Rain";
+    @Ignore static final String DRIZZLE = "Drizzle";
+    @Ignore static final String THUNDERSTORM = "Thunderstorm";
+    @Ignore static final String NOT_RAIN = "Not Rain";
 
     @ColumnInfo(name = "weather_id")
     @SerializedName("id")
@@ -45,6 +49,20 @@ public class Weather {
     public String getRainNotRain() {
         if (RAIN.equals(main)) {
             return RAIN;
+        }
+
+        if (DRIZZLE.equals(main)) {
+            return RAIN;
+        }
+
+        if (THUNDERSTORM.equals(main)) {
+            Pattern pattern =
+                    Pattern.compile(RAIN_NOT_RAIN_PATTERN_MATCHER, Pattern.CASE_INSENSITIVE);
+            if (pattern.matcher(description).find()) {
+                return RAIN;
+            } else {
+                return NOT_RAIN;
+            }
         }
 
         return NOT_RAIN;
