@@ -3,6 +3,7 @@ package com.example.notweather.ui;
 import android.Manifest;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.pm.PackageManager;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
@@ -11,11 +12,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import com.example.notweather.R;
+import com.example.notweather.databinding.ActivityMainBinding;
 import com.example.notweather.model.City;
+import com.example.notweather.model.Coordinates;
 import com.example.notweather.ui.adapter.WeatherCardAdapter;
 import com.example.notweather.viewmodel.WeatherViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -27,20 +28,27 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = MainActivity.class.getSimpleName();
 
     private WeatherViewModel weatherViewModel;
-    private WeatherCardAdapter adapter;
     private FusedLocationProviderClient fusedLocationClient;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setSupportActionBar(findViewById(R.id.toolbar));
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        setSupportActionBar(binding.toolbar);
 
-        RecyclerView recyclerView = findViewById(R.id.rv_weather_card_list);
-        adapter = new WeatherCardAdapter();
+        final WeatherCardAdapter adapter = new WeatherCardAdapter();
+        binding.rvWeatherCardList.setAdapter(adapter);
 
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
+        binding.srRefreshCardList.setOnRefreshListener(
+                () -> {
+                    if (binding.getCity() == null) {
+                        return;
+                    }
+
+                    Coordinates coordinates = binding.getCity().getCoordinates();
+                    getCurrentWeatherByLatLng(coordinates.getLat(), coordinates.getLng());
+                });
 
         weatherViewModel = ViewModelProviders.of(this).get(WeatherViewModel.class);
         weatherViewModel
@@ -53,8 +61,7 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                             City city = cityForecast.getCity();
-                            setTitle(String.format("%s (%s)", city.getName(), city.getCountry()));
-
+                            binding.setCity(city);
                             adapter.setCardList(cityForecast.getForecasts());
                         });
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -92,12 +99,14 @@ public class MainActivity extends AppCompatActivity {
                         this,
                         location -> {
                             // Got last known location. In some rare situations this can be null.
-                            if (location != null) {
-                                Log.i(TAG, "Location! " + location.toString());
-                                // Logic to handle location object
-                                getCurrentWeatherByLatLng(
-                                        location.getLatitude(), location.getLongitude());
+                            if (location == null) {
+                                showSnackBar(R.string.unable_to_get_location);
+                                return;
                             }
+                            Log.i(TAG, "Location! " + location.toString());
+                            // Logic to handle location object
+                            getCurrentWeatherByLatLng(
+                                    location.getLatitude(), location.getLongitude());
                         });
     }
 
@@ -139,12 +148,15 @@ public class MainActivity extends AppCompatActivity {
 
                             switch (status) {
                                 case SUCCESS:
+                                    binding.srRefreshCardList.setRefreshing(false);
                                     showSnackBar(R.string.successfully_loaded_forecast);
                                     break;
                                 case ERROR:
+                                    binding.srRefreshCardList.setRefreshing(false);
                                     showSnackBar(R.string.failed_to_load_forecast);
                                     break;
                                 case LOADING:
+                                    binding.srRefreshCardList.setRefreshing(true);
                                     showSnackBar(R.string.loading_forecast);
                                     break;
                             }

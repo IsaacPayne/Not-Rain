@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="@{@string/forecast(forecast.weather.main, forecast.weather.description)}"
+                android:text="@{@string/forecast_format(forecast.weather.main, forecast.weather.description)}"
                 app:layout_constraintStart_toEndOf="@id/iv_icon"
                 app:layout_constraintTop_toBottomOf="@id/tv_not_rain"
                 tools:text="Rain: 	light rain"/>
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="@{@string/temp(forecast.main.formattedTemperature)}"
+                android:text="@{@string/temp_format(forecast.main.formattedTemperature)}"
                 app:layout_constraintStart_toEndOf="@id/iv_icon"
                 app:layout_constraintTop_toBottomOf="@id/tv_forecast"
                 tools:text="Temp: 15.07"/>
@@ -66,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="@{@string/wind(forecast.wind.direction, forecast.wind.speed)}"
+                android:text="@{@string/wind_format(forecast.wind.direction, forecast.wind.speed)}"
                 app:layout_constraintStart_toEndOf="@id/iv_icon"
                 app:layout_constraintTop_toBottomOf="@id/tv_temp"
                 tools:text="Wind: NW 3.6m/s"/>

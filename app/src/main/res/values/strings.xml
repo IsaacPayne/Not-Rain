@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">Not Weather</string>
-    <string name="temp">Temp: %s</string>
-    <string name="wind">Wind: %s %sm/s</string>
-    <string name="forecast">%s: %s</string>
+    <string name="temp_format">Temp: %s</string>
+    <string name="wind_format">Wind: %s %sm/s</string>
+    <string name="forecast_format">%s: %s</string>
+    <string name="city_format">%s (%s)</string>
     <string name="location_required">Location Required</string>
     <string name="location_require_rationale">We need access to your location to show you the weather in your area</string>
     <string name="successfully_loaded_forecast">Successfully Loaded Forecast</string>
     <string name="failed_to_load_forecast">Failed To Load Forecast</string>
-    <string name="loading_forecast">Loading Forecast For Current Location…</string>
+    <string name="loading_forecast">Loading Forecast…</string>
+    <string name="unable_to_get_location">Unable to get your location</string>
+    <string name="to_get_started_tab_the_location_button_below">To get started tab the location button below</string>
 </resources>
