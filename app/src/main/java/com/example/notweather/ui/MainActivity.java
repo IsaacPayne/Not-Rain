@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
-import android.util.Log;
 import com.example.notweather.R;
 import com.example.notweather.databinding.ActivityMainBinding;
 import com.example.notweather.model.City;
@@ -23,7 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int PERMISSIONS_REQUEST_COARSE_LOCATION = 7689;
+    private static final int PERMISSIONS_REQUEST_FINE_LOCATION = 7689;
 
     private final String TAG = MainActivity.class.getSimpleName();
 
@@ -71,13 +70,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getUsersLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Permission is not granted
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                    this, Manifest.permission.ACCESS_FINE_LOCATION)) {
                 // Show an explanation to the user
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(R.string.location_required)
@@ -103,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
                                 showSnackBar(R.string.unable_to_get_location);
                                 return;
                             }
-                            Log.i(TAG, "Location! " + location.toString());
                             // Logic to handle location object
                             getCurrentWeatherByLatLng(
                                     location.getLatitude(), location.getLongitude());
@@ -113,15 +111,15 @@ public class MainActivity extends AppCompatActivity {
     private void requestLocationPermission() {
         ActivityCompat.requestPermissions(
                 this,
-                new String[] {Manifest.permission.ACCESS_COARSE_LOCATION},
-                PERMISSIONS_REQUEST_COARSE_LOCATION);
+                new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+                PERMISSIONS_REQUEST_FINE_LOCATION);
     }
 
     @Override
     public void onRequestPermissionsResult(
             int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         // If request is cancelled, the result arrays are empty.
-        if (requestCode != PERMISSIONS_REQUEST_COARSE_LOCATION) {
+        if (requestCode != PERMISSIONS_REQUEST_FINE_LOCATION) {
             return;
         }
 
