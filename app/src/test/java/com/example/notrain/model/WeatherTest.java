@@ -7,6 +7,17 @@ import org.junit.Test;
 public class WeatherTest {
 
     @Test
+    public void testTrainIsNotRain() {
+        Weather weatherRain =
+                new Weather(200, "Thunderstorm", "thunderstorm with light train", "11d");
+        assertEquals(Weather.NOT_RAIN, weatherRain.getRainNotRain());
+
+        Weather weatherDrizzle =
+                new Weather(210, "Thunderstorm", "thunderstorm with rainer", "11d");
+        assertEquals(Weather.NOT_RAIN, weatherDrizzle.getRainNotRain());
+    }
+
+    @Test
     public void testThunderstormMightBeRain() {
         Weather weatherRain =
                 new Weather(200, "Thunderstorm", "thunderstorm with light rain", "11d");

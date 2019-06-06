@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class Weather {
 
-    @Ignore private final String RAIN_NOT_RAIN_PATTERN_MATCHER = ".*rain.*|.*drizzle.*";
+    @Ignore private final String RAIN_NOT_RAIN_PATTERN_MATCHER = ".*\\brain\\b.*|.*\\bdrizzle\\b.*";
     @Ignore private final String ICON_URL_FORMAT = "https://api.openweathermap.org/img/w/%s.png";
     @Ignore static final String RAIN = "Rain";
     @Ignore static final String DRIZZLE = "Drizzle";
