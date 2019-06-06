@@ -1,6 +1,6 @@
 package com.example.notweather.repository.remote;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import com.example.notweather.BuildConfig;
 import com.example.notweather.model.CityForecast;
 import com.example.notweather.repository.Storage;

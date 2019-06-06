@@ -2,11 +2,11 @@ package com.example.notweather;
 
 import static org.junit.Assert.*;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.persistence.room.Room;
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.lifecycle.LiveData;
+import androidx.room.Room;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
 import com.example.notweather.model.City;
 import com.example.notweather.model.CityForecast;
 import com.example.notweather.model.Clouds;
@@ -79,8 +79,7 @@ public class RoomTest {
         cityDao.insert(cityWellington);
 
         Wind wind = new Wind(12.0, 357);
-        Weather weather =
-                new Weather(200, "Thunderstorm", "thunderstorm with light rain", "11d");
+        Weather weather = new Weather(200, "Thunderstorm", "thunderstorm with light rain", "11d");
         Main main = new Main(19.678, 0.0, 0, 0.0, 0.0, 0.0, 0.0, 0.0);
         Clouds clouds = new Clouds(12);
         Forecast forecast = new Forecast(1, 1, wind, weather, main, clouds, 1560178800000L, "");

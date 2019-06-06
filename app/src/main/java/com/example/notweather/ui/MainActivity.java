@@ -1,17 +1,15 @@
 package com.example.notweather.ui;
 
 import android.Manifest;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.pm.PackageManager;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 import android.util.Log;
 import com.example.notweather.R;
 import com.example.notweather.databinding.ActivityMainBinding;
@@ -21,6 +19,8 @@ import com.example.notweather.ui.adapter.WeatherCardAdapter;
 import com.example.notweather.viewmodel.WeatherViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PERMISSIONS_REQUEST_COARSE_LOCATION = 7689;

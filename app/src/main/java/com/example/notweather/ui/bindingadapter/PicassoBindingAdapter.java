@@ -1,7 +1,7 @@
 package com.example.notweather.ui.bindingadapter;
 
-import android.databinding.BindingAdapter;
 import android.widget.ImageView;
+import androidx.databinding.BindingAdapter;
 import com.example.notweather.R;
 import com.squareup.picasso.Picasso;
 
