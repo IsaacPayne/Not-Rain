@@ -9,13 +9,13 @@ public class Clouds {
     @ColumnInfo(name = "clouds_all")
     @SerializedName("all")
     @Expose
-    private final Integer all;
+    private final int all;
 
-    public Clouds(Integer all) {
+    public Clouds(int all) {
         this.all = all;
     }
 
-    public Integer getAll() {
+    public int getAll() {
         return all;
     }
 }

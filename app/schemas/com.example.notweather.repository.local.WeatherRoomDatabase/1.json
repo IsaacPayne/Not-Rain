@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "3fcbfe1b100b5d4a3fd0ce015b01dd8f",
+    "identityHash": "e2db083dc50adb961e2687fa20aa0a55",
     "entities": [
       {
         "tableName": "forecast",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `city_id` INTEGER NOT NULL, `dt` INTEGER, `dt_txt` TEXT, `wind_speed` REAL, `wind_deg` REAL, `weather_id` INTEGER, `weather_main` TEXT, `weather_description` TEXT, `weather_icon` TEXT, `main_temp` REAL, `main_pressure` REAL, `main_humidity` INTEGER, `main_sea_level` REAL, `main_ground_level` REAL, `main_temp_min` REAL, `main_temp_max` REAL, `main_temp_kf` REAL, `clouds_all` INTEGER, FOREIGN KEY(`city_id`) REFERENCES `city`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `city_id` INTEGER NOT NULL, `dt` INTEGER NOT NULL, `dt_txt` TEXT, `wind_speed` REAL, `wind_deg` REAL, `weather_id` INTEGER, `weather_main` TEXT, `weather_description` TEXT, `weather_icon` TEXT, `main_temp` REAL, `main_pressure` REAL, `main_humidity` INTEGER, `main_sea_level` REAL, `main_ground_level` REAL, `main_temp_min` REAL, `main_temp_max` REAL, `main_temp_kf` REAL, `clouds_all` INTEGER, FOREIGN KEY(`city_id`) REFERENCES `city`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -24,7 +24,7 @@
             "fieldPath": "timestamp",
             "columnName": "dt",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "datetimeString",
@@ -155,7 +155,7 @@
       },
       {
         "tableName": "city",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `city_name` TEXT, `country` TEXT, `timezone` INTEGER, `coordinates_lat` REAL, `coordinates_lng` REAL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `city_name` TEXT, `country` TEXT, `timezone` INTEGER NOT NULL, `coordinates_lat` REAL, `coordinates_lng` REAL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -179,7 +179,7 @@
             "fieldPath": "timezone",
             "columnName": "timezone",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "coordinates.lat",
@@ -206,7 +206,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"3fcbfe1b100b5d4a3fd0ce015b01dd8f\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e2db083dc50adb961e2687fa20aa0a55\")"
     ]
   }
 }

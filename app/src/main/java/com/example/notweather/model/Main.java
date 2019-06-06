@@ -10,52 +10,52 @@ public class Main {
     @ColumnInfo(name = "main_temp")
     @SerializedName("temp")
     @Expose
-    private final Double temp;
+    private final double temp;
 
     @ColumnInfo(name = "main_pressure")
     @SerializedName("pressure")
     @Expose
-    private final Double pressure;
+    private final double pressure;
 
     @ColumnInfo(name = "main_humidity")
     @SerializedName("humidity")
     @Expose
-    private final Integer humidity;
+    private final int humidity;
 
     @ColumnInfo(name = "main_sea_level")
     @SerializedName("sea_level")
     @Expose
-    private final Double seaLevel;
+    private final double seaLevel;
 
     @ColumnInfo(name = "main_ground_level")
     @SerializedName("grnd_level")
     @Expose
-    private final Double groundLevel;
+    private final double groundLevel;
 
     @ColumnInfo(name = "main_temp_min")
     @SerializedName("temp_min")
     @Expose
-    private final Double tempMin;
+    private final double tempMin;
 
     @ColumnInfo(name = "main_temp_max")
     @SerializedName("temp_max")
     @Expose
-    private final Double tempMax;
+    private final double tempMax;
 
     @ColumnInfo(name = "main_temp_kf")
     @SerializedName("temp_kf")
     @Expose
-    private final Double tempKf;
+    private final double tempKf;
 
     public Main(
-            Double temp,
-            Double pressure,
-            Integer humidity,
-            Double seaLevel,
-            Double groundLevel,
-            Double tempMin,
-            Double tempMax,
-            Double tempKf) {
+            double temp,
+            double pressure,
+            int humidity,
+            double seaLevel,
+            double groundLevel,
+            double tempMin,
+            double tempMax,
+            double tempKf) {
         this.temp = temp;
         this.pressure = pressure;
         this.humidity = humidity;
@@ -66,7 +66,7 @@ public class Main {
         this.tempKf = tempKf;
     }
 
-    public Double getTemp() {
+    public double getTemp() {
         return temp;
     }
 
@@ -74,31 +74,31 @@ public class Main {
         return String.format(Locale.getDefault(), "%.1f %sC", temp, (char) 0x00B0);
     }
 
-    public Double getPressure() {
+    public double getPressure() {
         return pressure;
     }
 
-    public Integer getHumidity() {
+    public int getHumidity() {
         return humidity;
     }
 
-    public Double getSeaLevel() {
+    public double getSeaLevel() {
         return seaLevel;
     }
 
-    public Double getGroundLevel() {
+    public double getGroundLevel() {
         return groundLevel;
     }
 
-    public Double getTempMin() {
+    public double getTempMin() {
         return tempMin;
     }
 
-    public Double getTempMax() {
+    public double getTempMax() {
         return tempMax;
     }
 
-    public Double getTempKf() {
+    public double getTempKf() {
         return tempKf;
     }
 }

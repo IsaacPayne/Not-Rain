@@ -34,9 +34,9 @@ public class City {
     @ColumnInfo(name = "timezone")
     @SerializedName("timezone")
     @Expose
-    private final Integer timezone;
+    private final int timezone;
 
-    public City(int id, String name, Coordinates coordinates, String country, Integer timezone) {
+    public City(int id, String name, Coordinates coordinates, String country, int timezone) {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -60,7 +60,7 @@ public class City {
         return country;
     }
 
-    public Integer getTimezone() {
+    public int getTimezone() {
         return timezone;
     }
 }

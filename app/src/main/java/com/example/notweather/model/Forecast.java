@@ -61,7 +61,7 @@ public class Forecast {
     @ColumnInfo(name = "dt")
     @SerializedName("dt")
     @Expose
-    private final Long timestamp;
+    private final long timestamp;
 
     @ColumnInfo(name = "dt_txt")
     @SerializedName("dt_txt")
@@ -75,7 +75,7 @@ public class Forecast {
             Weather weather,
             Main main,
             Clouds clouds,
-            Long timestamp,
+            long timestamp,
             String datetimeString) {
         this.id = id;
         this.cityId = cityId;
@@ -115,7 +115,7 @@ public class Forecast {
         return clouds;
     }
 
-    public Long getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 
