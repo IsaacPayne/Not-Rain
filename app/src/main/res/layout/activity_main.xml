@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <import type="android.view.View"/>
-        <variable name="city" type="com.example.notweather.model.City"/>
+        <variable name="city" type="com.example.notrain.model.City"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

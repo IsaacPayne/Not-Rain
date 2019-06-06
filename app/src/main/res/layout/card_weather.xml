@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="forecast" type="com.example.notweather.model.Forecast"/>
+        <variable name="forecast" type="com.example.notrain.model.Forecast"/>
     </data>
 
     <androidx.cardview.widget.CardView

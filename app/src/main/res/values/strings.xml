@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Not Weather</string>
+    <string name="app_name">Not Rain</string>
     <string name="temp_format">Temp: %s</string>
     <string name="wind_format">Wind: %s %sm/s</string>
     <string name="forecast_format">%s: %s</string>
