@@ -3,10 +3,14 @@ package com.example.notrain;
 import static org.junit.Assert.*;
 
 import android.content.Context;
+
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
+import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
 import com.example.notrain.model.City;
 import com.example.notrain.model.CityForecast;
 import com.example.notrain.model.Clouds;
@@ -18,10 +22,10 @@ import com.example.notrain.model.Wind;
 import com.example.notrain.repository.dao.CityDao;
 import com.example.notrain.repository.dao.ForecastDao;
 import com.example.notrain.repository.local.WeatherRoomDatabase;
-import com.example.notrain.LiveDataTestUtil;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -36,9 +40,13 @@ public class RoomTest {
     private ForecastDao forecastDao;
     private WeatherRoomDatabase db;
 
+    // https://stackoverflow.com/a/49840604/1543839
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
+
     @Before
     public void createDb() {
-        Context appContext = InstrumentationRegistry.getTargetContext();
+        Context appContext = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(appContext, WeatherRoomDatabase.class).build();
         cityDao = db.cityDao();
         forecastDao = db.forecastDao();
