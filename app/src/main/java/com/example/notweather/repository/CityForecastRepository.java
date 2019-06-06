@@ -1,9 +1,9 @@
 package com.example.notweather.repository;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import com.example.notweather.model.City;
 import com.example.notweather.model.CityForecast;
 import com.example.notweather.model.Forecast;

@@ -1,6 +1,6 @@
 package com.example.notweather.viewholders;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.notweather.databinding.CardWeatherBinding;
 import com.example.notweather.model.Forecast;
 

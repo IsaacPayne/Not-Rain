@@ -1,7 +1,7 @@
 package com.example.notweather.model;
 
-import android.arch.persistence.room.Embedded;
-import android.arch.persistence.room.Relation;
+import androidx.room.Embedded;
+import androidx.room.Relation;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;

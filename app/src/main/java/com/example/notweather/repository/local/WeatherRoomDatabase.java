@@ -1,9 +1,9 @@
 package com.example.notweather.repository.local;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
 import com.example.notweather.model.City;
 import com.example.notweather.model.Forecast;
 import com.example.notweather.repository.dao.CityDao;

@@ -1,9 +1,9 @@
 package com.example.notweather.ui.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.notweather.databinding.CardWeatherBinding;
 import com.example.notweather.model.Forecast;
 import com.example.notweather.viewholders.WeatherViewHolder;

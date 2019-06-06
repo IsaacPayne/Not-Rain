@@ -1,7 +1,7 @@
 package com.example.notweather.repository;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /** Taken from {see:https://github.com/googlesamples/android-architecture-components} */
 public class Resource<T> {

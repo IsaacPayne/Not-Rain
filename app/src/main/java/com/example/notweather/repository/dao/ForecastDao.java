@@ -1,6 +1,6 @@
 package com.example.notweather.repository.dao;
 
-import android.arch.persistence.room.Dao;
+import androidx.room.Dao;
 import com.example.notweather.model.Forecast;
 
 @Dao

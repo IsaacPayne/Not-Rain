@@ -1,8 +1,8 @@
 package com.example.notweather.viewmodel;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import com.example.notweather.model.CityForecast;
 import com.example.notweather.repository.CityForecastRepository;
 import com.example.notweather.repository.Resource;

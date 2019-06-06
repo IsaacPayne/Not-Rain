@@ -1,10 +1,10 @@
 package com.example.notweather.repository.dao;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.OnConflictStrategy;
-import android.arch.persistence.room.Transaction;
-import android.arch.persistence.room.Update;
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+import androidx.room.Transaction;
+import androidx.room.Update;
 import java.util.ArrayList;
 import java.util.List;
 
