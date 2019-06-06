@@ -2,16 +2,12 @@ package com.example.notweather.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Ignore;
-import android.graphics.Bitmap;
-import android.util.Log;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.squareup.picasso.Picasso;
-import java.io.IOException;
 
 public class Weather {
-    @Ignore private final String TAG = Weather.class.getSimpleName();
-    @Ignore private final int TARGET_WIDTH_HEIGHT = 75;
+
+    @Ignore private final String ICON_URL_FORMAT = "https://api.openweathermap.org/img/w/%s.png";
     @Ignore private final String RAIN = "Rain";
     @Ignore private final String NOT_RAIN = "Not Rain";
 
@@ -66,22 +62,7 @@ public class Weather {
         return icon;
     }
 
-    /**
-     * Not really sure if this should live here, but Picasso seems to break the MVVM pattern
-     *
-     * @return The Icon Bitmap to be displayed in an ImageView
-     */
-    public Bitmap getIconBitmap() {
-        String url = createIconUrl();
-        try {
-            return Picasso.get().load(url).resize(TARGET_WIDTH_HEIGHT, TARGET_WIDTH_HEIGHT).get();
-        } catch (IOException e) {
-            Log.w(TAG, String.format("Failed to load img: %s", url));
-            return null;
-        }
-    }
-
-    private String createIconUrl() {
-        return String.format("https://api.openweathermap.org/img/w/%s.png", icon);
+    public String getIconUrl() {
+        return String.format(ICON_URL_FORMAT, icon);
     }
 }

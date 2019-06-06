@@ -25,6 +25,7 @@
                 android:layout_height="75dp"
                 android:padding="10dp"
                 android:contentDescription="@{forecast.weather.description}"
+                app:imageUrl="@{forecast.weather.iconUrl}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:src="@drawable/ic_launcher"/>
