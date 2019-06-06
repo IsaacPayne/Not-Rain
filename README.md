@@ -44,6 +44,8 @@ Uses:
 - Validate API Response
 - Ability to manually select/search a location.
 - More reliable locations ([Receiving Location Updates](https://developer.android.com/training/location/receive-location-updates.html))
+- Test on more devices
+
 
 
 ## Authors
