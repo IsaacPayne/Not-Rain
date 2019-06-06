@@ -3,14 +3,11 @@ package com.example.notrain;
 import static org.junit.Assert.*;
 
 import android.content.Context;
-
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
-import androidx.test.InstrumentationRegistry;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-
 import com.example.notrain.model.City;
 import com.example.notrain.model.CityForecast;
 import com.example.notrain.model.Clouds;
@@ -22,7 +19,6 @@ import com.example.notrain.model.Wind;
 import com.example.notrain.repository.dao.CityDao;
 import com.example.notrain.repository.dao.ForecastDao;
 import com.example.notrain.repository.local.WeatherRoomDatabase;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -41,8 +37,7 @@ public class RoomTest {
     private WeatherRoomDatabase db;
 
     // https://stackoverflow.com/a/49840604/1543839
-    @Rule
-    public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
+    @Rule public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
     @Before
     public void createDb() {
